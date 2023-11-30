@@ -47,6 +47,8 @@ export const TableList = ({ navigation }) => {
           <Modal
             visible={modalVisible}
             onRequestClose={handleModalClose}
+            style={styles.modalContainer}
+            animationType='slide'
             
           >
             <View style={styles.modalContainer}>
@@ -64,7 +66,7 @@ export const TableList = ({ navigation }) => {
                 <Text style={{marginTop:10, fontSize:20, color:'white'}}>Close</Text>
                 </View> 
               </TouchableOpacity>
-            </View>
+              </View>
           </Modal>
         );
       };
@@ -161,6 +163,8 @@ marginTop:200,
         width: 300,
         height: 400,
         padding: 20,
+        
     }
+
 
 });
