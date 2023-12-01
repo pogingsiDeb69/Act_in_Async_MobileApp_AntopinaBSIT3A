@@ -49,6 +49,7 @@ export const TableList = ({ navigation }) => {
             onRequestClose={handleModalClose}
             style={styles.modalContainer}
             animationType='slide'
+            transparent
             
           >
             <View style={styles.modalContainer}>
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
 
     },
     modalContainer:{
-        
+        backgroundColor:"#fff",
        elevation:10,
        
 marginTop:200,

@@ -9,7 +9,27 @@ import { Picker } from "@react-native-picker/picker";
 
 export { AiOutlineDown };
 
-export const Registering = ({ navigation }) => {
+const toastConfig = {
+  /*
+    Overwrite 'success' type,
+    by modifying the existing `BaseToast` component
+  */
+  success: (props) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: 'pink' }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{
+        fontSize: 15,
+        fontWeight: '400',
+        height:50
+      }}
+    />
+  ),
+
+}
+
+export const Registering = ({ navigation, props}) => {
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
   const [course, setcourse] = useState("Select Course");
@@ -79,6 +99,7 @@ export const Registering = ({ navigation }) => {
   
     // Show a success toast message
     showToast("Data added successfully");
+    <Toast/>
   
     // Clear the input fields
     clearInputs();
@@ -89,9 +110,14 @@ export const Registering = ({ navigation }) => {
     Toast.show({
       type: "success",
       text1: message,
+      position:"bottom",
+      contentContainerStyle:{
+        marginTop:200
+      }
       
     });
   };
+  
 
   const clearInputs = () => {
     setfirstname("");
@@ -101,9 +127,11 @@ export const Registering = ({ navigation }) => {
     setpassword("");
   };
 
+  
+
     return (
         <View style={styles.container}>
-
+            <View style={{marginTop:50}}></View>
             <TextInput placeholder="Firstname" style={styles.input} onChangeText={(firstname) => setfirstname(firstname)} onFocus={() => setInputFocused(true)}
             onBlur={() => setInputFocused(false)} />
             <TextInput placeholder="Lastname"style={styles.input} onChangeText={(lastname) => setlastname(lastname)}  onFocus={() => setInputFocused(true)}
@@ -127,10 +155,11 @@ export const Registering = ({ navigation }) => {
             <TextInput placeholder="Password" style={styles.input} onChangeText={(password) => setpassword(password)}  secureTextEntry={true} onFocus={() => setInputFocused(true)}
             onBlur={() => setInputFocused(false)}/>
             
-            <View style={{marginTop: 100}}></View>
+            <View style={{marginTop: 50}}></View>
 
             <TouchableOpacity style={styles.button} onPress={() => save()}>
                 <Text style={{ color: "white" }}>Add Student</Text>
+                <Toast/>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Table')}>
@@ -143,6 +172,7 @@ export const Registering = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
+      display:"flex",
         flex: 1,
         backgroundColor: "#fff",
         alignItems: "center",
@@ -156,12 +186,14 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#dfe4ea",
         alignSelf: "stretch",
-        margin: 32,
-        marginBottom:0,
-        height: 50,
+        
+        marginLeft:32,
+        marginRight:32,
+        marginBottom:20,
+        height: 40,
         borderRadius: 3,
         paddingHorizontal: 16,
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: "300",
         color:"grey",
         
@@ -173,7 +205,7 @@ const styles = StyleSheet.create({
         alignSelf: "stretch",
         paddingVertical: 12,
         paddingHorizontal: 32,
-        marginTop: 32,
+        marginTop: 10,
         marginHorizontal: 32,
         height: 60,
     },
